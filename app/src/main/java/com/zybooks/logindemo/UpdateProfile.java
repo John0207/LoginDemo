@@ -1,14 +1,13 @@
 package com.zybooks.logindemo;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +22,6 @@ public class UpdateProfile extends AppCompatActivity {
     private Button save;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,29 +38,26 @@ public class UpdateProfile extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-//      reference of user in database using Uid
         final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
-//      Access the database and retrieve the data
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //retreive values from db and asign them to instance of UserProfile class
-                UserProfile userProfile = snapshot.getValue(UserProfile.class);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
                 newUserName.setText(userProfile.getUserName());
                 newUserAge.setText(userProfile.getUserAge());
                 newUserEmail.setText(userProfile.getUserEmail());
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(UpdateProfile.this, error.getCode(),Toast.LENGTH_SHORT).show();
-
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(UpdateProfile.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
             }
         });
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 String name = newUserName.getText().toString();
                 String age = newUserAge.getText().toString();
                 String email = newUserEmail.getText().toString();
@@ -75,10 +70,11 @@ public class UpdateProfile extends AppCompatActivity {
             }
         });
 
+
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
             case android.R.id.home:
