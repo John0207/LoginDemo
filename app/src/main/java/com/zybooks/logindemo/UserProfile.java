@@ -11,9 +11,12 @@ public class UserProfile {
 
     //constructor, assign values that are provided from other activities to the variables within it
     public UserProfile(String userAge, String userEmail, String userName) {
-        this.userAge = userAge;
+
         this.userEmail = userEmail;
         this.userName = userName;
+        this.userAge = userAge;
+
+
     }
 
     //getters and setters to access variables
