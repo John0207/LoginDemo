@@ -4,22 +4,15 @@ public class UserProfile {
     public String userAge;
     public String userEmail;
     public String userName;
-//  function overloading, concept of oop, same functions but increasing parameters
+
     public UserProfile(){
-
-   }
-
-    //constructor, assign values that are provided from other activities to the variables within it
-    public UserProfile(String userAge, String userEmail, String userName) {
-
-        this.userEmail = userEmail;
-        this.userName = userName;
-        this.userAge = userAge;
-
-
     }
 
-    //getters and setters to access variables
+    public UserProfile(String userAge, String userEmail, String userName) {
+        this.userAge = userAge;
+        this.userEmail = userEmail;
+        this.userName = userName;
+    }
 
     public String getUserAge() {
         return userAge;
