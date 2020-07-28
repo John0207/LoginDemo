@@ -52,10 +52,12 @@ public class SecondActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.logoutMenu:{
                 Logout();
+                break;
             }
             //direct user from this activity to profile activity
             case R.id.profileMenu:
                 startActivity(new Intent(SecondActivity.this, ProfileActivity.class));
+                break;
 
         }
         return super.onOptionsItemSelected(item);

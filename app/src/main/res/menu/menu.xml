@@ -5,25 +5,21 @@
         android:id="@+id/logoutMenu"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:title="Logout"
-        >
-
+        android:title="Logout">
     </item>
+
     <item
         android:id="@+id/profileMenu"
         android:orderInCategory="200"
         app:showAsAction="always"
-        android:title="Profile"
-        >
-
+        android:title="Profile">
     </item>
+
     <item
         android:id="@+id/refreshMenu"
         android:orderInCategory="300"
-        app:showAsAction="always"
-        android:title="Refresh"
-        >
-
+        app:showAsAction="never"
+        android:title="Refresh">
     </item>
 
 </menu>
