@@ -1,40 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SecondActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Inventory"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/cardview_dark_background"
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.484" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_weight="2"
+            android:background="#009688">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvInventory"
+                android:layout_width="157dp"
+                android:layout_height="58dp"
+                android:layout_centerHorizontal="true"
+                android:background="#009688"
+                android:text="Inventory"
+                android:textSize="36sp"></TextView>
+        </RelativeLayout>
+
+        <GridLayout
+            android:id="@+id/mainGrid"
+            android:layout_width="match_parent"
+            android:layout_height="371dp"
+            android:layout_weight="8"
+            android:alignmentMode="alignMargins"
+            android:background="#FFFFFF"
+            android:columnCount="5"
+            android:columnOrderPreserved="false"
+            android:padding="14dp"
+            android:rowCount="3">
+
+            <!-- Row1 -->
+            <!-- column1 -->
+
+            <!-- column2 -->
+            <androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tvItemName"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:text="Item Name"></TextView>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tvQuantity"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:text="Quantity:  "></TextView>
+            </androidx.cardview.widget.CardView>
+
+
+            <!-- column3 -->
+            <androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btnAdd"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:text="+"></Button>
+            </androidx.cardview.widget.CardView>
+
+            <!-- column4 -->
+            <androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btnSub"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:text="-"></Button>v
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btnDel"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:text="X"></Button>v
+            </androidx.cardview.widget.CardView>
+
+            <!-- Row2 -->
+            <!-- column1 -->
+            <androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tvItemName2"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:text="Item Name"></TextView>
+            </androidx.cardview.widget.CardView>
+
+            <!-- column2 -->
+            <androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tvQuantity2"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:text="Quantity:  "></TextView>
+            </androidx.cardview.widget.CardView>
+
+
+            <!-- column3 -->
+            <androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btnAdd2"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:text="+"></Button>
+            </androidx.cardview.widget.CardView>
+
+            <!-- column4 -->
+            <androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btnSub2"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:text="-"></Button>v
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btnDel2"
+                    android:layout_width="75dp"
+                    android:layout_height="50dp"
+                    android:text="X"></Button>v
+            </androidx.cardview.widget.CardView>
+
+
+        </GridLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="275dp"
+            android:layout_weight="2"
+            android:background="#FFFFFF">
+
+            <Switch
+                android:id="@+id/switchTextNotifications"
+                android:layout_width="266dp"
+                android:layout_height="18dp"
+                android:text="Recieve Text Notifications?"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/faBtnAddItem"
+                app:layout_constraintHorizontal_bias="0.219"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.064" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/faBtnAddItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.954"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/add"
+                tools:ignore="VectorDrawableCompat" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</ScrollView>

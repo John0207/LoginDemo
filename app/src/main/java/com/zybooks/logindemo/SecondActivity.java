@@ -1,65 +1,63 @@
 package com.zybooks.logindemo;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Switch;
+import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.jar.Attributes;
 
 public class SecondActivity extends AppCompatActivity {
+    private TextView Inventory;
 
-    private FirebaseAuth firebaseAuth;
-    private Button logout;
+    private TextView itemName;
+    private TextView Quantity;
+    private Button Add;
+    private Button Subtract;
+    private Button Delete;
+
+    private TextView itemName2;
+    private TextView Quantity2;
+    private Button Add2;
+    private Button Subtract2;
+    private Button Delete2;
+
+    private Switch textNotifications;
+    private FloatingActionButton addItem;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        itemName = (TextView)findViewById(R.id.tvItemName);
+        Quantity = (TextView)findViewById(R.id.tvQuantity);
+        Add = (Button)findViewById(R.id.btnAdd);
+        Subtract = (Button)findViewById(R.id.btnSub);
+        Delete = (Button)findViewById(R.id.btnDel);
 
-        logout = (Button)findViewById(R.id.btnLogout);
+        itemName2 = (TextView)findViewById(R.id.tvItemName2);
+        Quantity2 = (TextView)findViewById(R.id.tvQuantity2);
+        Add2 = (Button)findViewById(R.id.btnAdd2);
+        Subtract2 = (Button)findViewById(R.id.btnSub2);
+        Delete2 = (Button)findViewById(R.id.btnDel2);
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Logout();
-            }
-        });
-    }
+        textNotifications = (Switch)findViewById(R.id.switchTextNotifications);
+        addItem = (FloatingActionButton)findViewById(R.id.faBtnAddItem);
 
-    //makes code more readable to use seperate function for logout
-    private void Logout(){
-        firebaseAuth.signOut();
-        finish();
-        startActivity(new Intent(SecondActivity.this, MainActivity.class));
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.logoutMenu:{
-                Logout();
-                break;
-            }
-            //direct user from this activity to profile activity
-            case R.id.profileMenu:
-                startActivity(new Intent(SecondActivity.this, ProfileActivity.class));
-                break;
-
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
