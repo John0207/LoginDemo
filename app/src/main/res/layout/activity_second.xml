@@ -47,20 +47,22 @@
             <!-- column2 -->
             <androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/tvItemName"
+                <EditText
+                    android:id="@+id/etItemName"
                     android:layout_width="75dp"
                     android:layout_height="50dp"
-                    android:text="Item Name"></TextView>
+                    android:text="Item Name"></EditText>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/tvQuantity"
+                <EditText
+                    android:id="@+id/etQuantity"
                     android:layout_width="75dp"
                     android:layout_height="50dp"
-                    android:text="Quantity:  "></TextView>
+                    android:ems="10"
+                    android:inputType="numberSigned"
+                    tools:text="Quantity: " />
             </androidx.cardview.widget.CardView>
 
 

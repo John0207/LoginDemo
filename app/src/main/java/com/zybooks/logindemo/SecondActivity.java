@@ -1,26 +1,30 @@
 package com.zybooks.logindemo;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Build;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.text.Editable;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.jar.Attributes;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SecondActivity extends AppCompatActivity {
     private TextView Inventory;
 
-    private TextView itemName;
-    private TextView Quantity;
+    private TextView ItemName;
+    private EditText Quantity;
     private Button Add;
     private Button Subtract;
     private Button Delete;
@@ -33,6 +37,9 @@ public class SecondActivity extends AppCompatActivity {
 
     private Switch textNotifications;
     private FloatingActionButton addItem;
+    private DatabaseReference firebaseDatabaseItems;
+    private String itemName;
+    private String itemQuantity;
 
 
 
@@ -42,8 +49,10 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        itemName = (TextView)findViewById(R.id.tvItemName);
-        Quantity = (TextView)findViewById(R.id.tvQuantity);
+        firebaseDatabaseItems = FirebaseDatabase.getInstance().getReference();
+
+        ItemName = (EditText)findViewById(R.id.etItemName);
+        Quantity = (EditText)findViewById(R.id.etQuantity);
         Add = (Button)findViewById(R.id.btnAdd);
         Subtract = (Button)findViewById(R.id.btnSub);
         Delete = (Button)findViewById(R.id.btnDel);
@@ -58,6 +67,30 @@ public class SecondActivity extends AppCompatActivity {
         addItem = (FloatingActionButton)findViewById(R.id.faBtnAddItem);
 
 
+        itemName = ItemName.getText().toString().trim();
+        itemQuantity = Quantity.getText().toString().trim();
+
+        addItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newItem(itemName, itemQuantity);
+            }
+        });
+
+
+
+
+
+
+
+
+
+    }
+
+    private void newItem(String itemName, String itemQuantity){
+
+        Item item = new Item(itemName, itemQuantity);
+        firebaseDatabaseItems.child("Items").setValue(item);
 
     }
 }
