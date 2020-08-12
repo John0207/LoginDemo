@@ -5,6 +5,7 @@ public class Item {
     public String itemQuantity;
 
     public Item(){
+        this("Unknown", "0");
 
     }
 
