@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth.signInWithEmailAndPassword(userName, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            public void onComplete(Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     progressDialog.dismiss();
                     //Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
