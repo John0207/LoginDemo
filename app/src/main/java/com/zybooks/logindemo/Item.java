@@ -1,15 +1,17 @@
 package com.zybooks.logindemo;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
     public String itemName;
     public String itemQuantity;
 
-    public Item(){
+    public Item() {
         this("Unknown", "0");
 
     }
 
-    public Item(String itemName, String itemQuantity){
+    public Item(String itemName, String itemQuantity) {
         this.itemName = itemName;
         this.itemQuantity = itemQuantity;
     }

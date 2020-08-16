@@ -8,10 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -34,26 +31,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//setup UI views
         Name = (EditText)findViewById(R.id.etName);
         Password = (EditText)findViewById(R.id.etPassword);
         Info = (TextView)findViewById(R.id.tvInfo);
         Login = (Button)findViewById(R.id.btnLogin);
         userRegistration = (TextView)findViewById(R.id.tvRegister);
         forgotPassword = (TextView)findViewById(R.id.tvForgotPassword);
-
-        Info.setText("No of attempts remaining: 5");
-
+        Info.setText("Number of attempts remaining: 5");
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
-
+//get instance of Firebase authorization DB
         FirebaseUser user = firebaseAuth.getCurrentUser();
-
+//if the user is validated proceed to the inventory screen
         if(user != null){
             finish();
             startActivity(new Intent(MainActivity.this, SecondActivity.class));
         }
-
+//onclick listeners for various buttons
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,18 +70,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+//function which validates the user with the Firebase Authorization DB
     private void validate(String userName, String userPassword) {
-
         progressDialog.setMessage("Loading");
         progressDialog.show();
-
         firebaseAuth.signInWithEmailAndPassword(userName, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     progressDialog.dismiss();
-                    //Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     checkEmailVerification();
                 }else{
                     Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
@@ -99,14 +91,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
-
+//function which when fully implemented validates the user's email, can be used at a later date when the app is deployed
+//For simplicity this function skips the actually email validation but can be uncommented and used when desired
     private void checkEmailVerification(){
         FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
         Boolean emailflag = firebaseUser.isEmailVerified();
-
         startActivity(new Intent(MainActivity.this, SecondActivity.class));
 
 //        if(emailflag){

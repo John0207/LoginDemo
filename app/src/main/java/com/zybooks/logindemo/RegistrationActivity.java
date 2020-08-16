@@ -31,7 +31,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 
-public class RegistrationActivity extends AppCompatActivity{
+public class RegistrationActivity extends AppCompatActivity {
 
     private EditText userName, userPassword, userEmail, userAge;
     private Button regButton;
@@ -47,7 +47,7 @@ public class RegistrationActivity extends AppCompatActivity{
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == PICK_IMAGE && resultCode == RESULT_OK && data.getData() != null){
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data.getData() != null) {
             imagePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imagePath);
@@ -81,13 +81,10 @@ public class RegistrationActivity extends AppCompatActivity{
         });
 
 
-
-
-
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validate()){
+                if (validate()) {
                     //Upload data to the database
                     String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
@@ -96,14 +93,14 @@ public class RegistrationActivity extends AppCompatActivity{
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 //sendEmailVerification();
                                 sendUserData();
                                 firebaseAuth.signOut();
                                 Toast.makeText(RegistrationActivity.this, "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
                                 finish();
                                 startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
-                            }else{
+                            } else {
                                 Toast.makeText(RegistrationActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                             }
 
@@ -122,17 +119,17 @@ public class RegistrationActivity extends AppCompatActivity{
 
     }
 
-    private void setupUIViews(){
-        userName = (EditText)findViewById(R.id.etUserName);
-        userPassword = (EditText)findViewById(R.id.etUserPassword);
-        userEmail = (EditText)findViewById(R.id.etUserEmail);
-        regButton = (Button)findViewById(R.id.btnRegister);
-        userLogin = (TextView)findViewById(R.id.tvUserLogin);
-        userAge = (EditText)findViewById(R.id.etAge);
-        userProfilePic = (ImageView)findViewById(R.id.ivProfile);
+    private void setupUIViews() {
+        userName = (EditText) findViewById(R.id.etUserName);
+        userPassword = (EditText) findViewById(R.id.etUserPassword);
+        userEmail = (EditText) findViewById(R.id.etUserEmail);
+        regButton = (Button) findViewById(R.id.btnRegister);
+        userLogin = (TextView) findViewById(R.id.tvUserLogin);
+        userAge = (EditText) findViewById(R.id.etAge);
+        userProfilePic = (ImageView) findViewById(R.id.ivProfile);
     }
 
-    private Boolean validate(){
+    private Boolean validate() {
         Boolean result = false;
 
         name = userName.getText().toString();
@@ -141,9 +138,9 @@ public class RegistrationActivity extends AppCompatActivity{
         age = userAge.getText().toString();
 
 
-        if(name.isEmpty() || password.isEmpty() || email.isEmpty() || age.isEmpty() || imagePath == null){
+        if (name.isEmpty() || password.isEmpty() || email.isEmpty() || age.isEmpty() || imagePath == null) {
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             result = true;
         }
 
@@ -151,19 +148,19 @@ public class RegistrationActivity extends AppCompatActivity{
     }
 
 
-    private void sendEmailVerification(){
+    private void sendEmailVerification() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        if(firebaseUser!=null){
+        if (firebaseUser != null) {
             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         sendUserData();
                         Toast.makeText(RegistrationActivity.this, "Successfully Registered, Verification mail sent!", Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
                         finish();
                         startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
-                    }else{
+                    } else {
                         Toast.makeText(RegistrationActivity.this, "Verification mail has'nt been sent!", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -171,7 +168,7 @@ public class RegistrationActivity extends AppCompatActivity{
         }
     }
 
-    private void sendUserData(){
+    private void sendUserData() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
         StorageReference imageReference = storageReference.child(firebaseAuth.getUid()).child("Images").child("Profile Pic"); //User id/Images/profile_pic.png
